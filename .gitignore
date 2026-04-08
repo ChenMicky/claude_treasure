@@ -141,3 +141,17 @@ vite.config.ts.timestamp-*
 build/
 */.DS_Store
 .vercel/
+
+# ==================================================
+# Cline / Claude 專案記憶系統
+# ==================================================
+
+# 保留 .claude 目錄（Memory Bank 系統）
+# 這個目錄包含專案記憶，應該納入版本控制
+!.claude/
+!.claude/memory/
+!.claude/memory/*.md
+
+# 保留 .clinerules 文件
+# 這個文件定義 Cline 的行為規則
+!.clinerules

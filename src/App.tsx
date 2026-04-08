@@ -37,12 +37,19 @@ export default function App() {
     initializeGame();
   }, []);
 
+  // Plays the appropriate sound effect when opening a box
   const openBox = (boxId: number) => {
     if (gameEnded) return;
     
     setBoxes(prevBoxes => {
       const updatedBoxes = prevBoxes.map(box => {
         if (box.id === boxId && !box.isOpen) {
+          // Play sound effect based on box content
+          const audio = new Audio(box.hasTreasure ? chestOpenSound : evilLaughSound);
+          audio.play().catch(error => {
+            console.log('Audio playback failed:', error);
+          });
+          
           const newScore = box.hasTreasure ? score + 100 : score - 50;
           setScore(newScore);
           return { ...box, isOpen: true };
@@ -78,6 +85,26 @@ export default function App() {
       </div>
 
       <div className="mb-8">
+        {/* Game result display - shows Win/Tie/Lose when game ends */}
+        {gameEnded && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-4"
+          >
+            <div className={`text-5xl font-bold text-center p-6 rounded-xl shadow-xl border-4 ${
+              score > 0 
+                ? 'bg-green-100 text-green-700 border-green-400' 
+                : score === 0 
+                ? 'bg-yellow-100 text-yellow-700 border-yellow-400'
+                : 'bg-red-100 text-red-700 border-red-400'
+            }`}>
+              {score > 0 ? '🎉 WIN! 🎉' : score === 0 ? '🤝 TIE! 🤝' : '💀 LOSE! 💀'}
+            </div>
+          </motion.div>
+        )}
+        
         <div className="text-2xl text-center p-4 bg-amber-200/80 backdrop-blur-sm rounded-lg shadow-lg border-2 border-amber-400">
           <span className="text-amber-900">Current Score: </span>
           <span className={`${score >= 0 ? 'text-green-600' : 'text-red-600'}`}>
