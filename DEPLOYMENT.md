@@ -1,47 +1,85 @@
 # GitHub Pages Deployment Guide
 
-## Setup Complete ✅
+## ✅ Configuration Complete
 
-Your project is now configured to deploy to GitHub Pages instead of Vercel.
+Your project is now configured for GitHub Pages deployment. The `.claude/settings.local.json` file has been excluded from version control.
 
-## Configuration Changes Made
+## 📦 Files Included in Deployment
 
-1. **package.json**:
-   - Added `gh-pages` as a dev dependency
-   - Added `predeploy` script (builds the project before deployment)
-   - Added `deploy` script (pushes to GitHub Pages)
-   - Set `homepage` to your GitHub Pages URL
+The following files have been staged and committed:
+- `package.json` - Updated with deployment scripts
+- `vite.config.ts` - Configured with base path for GitHub Pages
+- `DEPLOYMENT.md` - This deployment guide
 
-2. **vite.config.ts**:
-   - Added `base: '/claude_code_treasure_game/'` to handle GitHub Pages routing
+## 🚀 Deployment Methods
 
-## Deployment Commands
+### Method 1: Using GitHub CLI (Recommended)
 
-### Deploy to GitHub Pages
+**Prerequisites:**
+- Install GitHub CLI: https://github.com/cli/cli
+- Authenticate: `gh auth login`
+
+**Deploy:**
 ```bash
-npm run deploy
+./deploy.sh
 ```
 
-This will:
-1. Build your project (`npm run build`)
-2. Deploy the build folder to GitHub Pages
-
-### Local Development
+Or manually:
 ```bash
-npm run dev
+npm run build
+gh-pages -d build
 ```
 
-## Important Notes
+### Method 2: Manual Deployment
 
-- Make sure to replace `<your-username>` and `<your-repo-name>` in the homepage URL if needed
-- The project must be in a GitHub repository
-- You need to have GitHub CLI (`gh`) installed and authenticated
-- After deployment, your site will be available at: `https://<your-username>.github.io/<your-repo-name>`
+1. Build your project:
+   ```bash
+   npm run build
+   ```
 
-## Troubleshooting
+2. Install gh-pages if not already installed:
+   ```bash
+   npm install --save-dev gh-pages
+   ```
 
-If you encounter issues:
-1. Ensure you're on the correct branch (usually `main` or `master`)
-2. Check that your GitHub repository is public (or you have proper authentication)
-3. Verify the homepage URL in package.json matches your repository settings
-4. Run `npm run build` locally to ensure the build works before deploying
+3. Deploy to GitHub Pages:
+   ```bash
+   npx gh-pages -d build
+   ```
+
+## 🌐 Access Your Site
+
+After deployment, your site will be available at:
+```
+https://<your-username>.github.io/claude_code_treasure_game
+```
+
+## 📋 Configuration Details
+
+### Vite Configuration
+- Base path set to `/claude_code_treasure_game/` for proper routing on GitHub Pages
+
+### Package Scripts
+- `npm run build` - Build for production
+- `npm run predeploy` - Build before deployment (automatically called)
+- `npm run deploy` - Deploy to GitHub Pages
+
+## 🔧 Excluded Files
+
+The following files are excluded from version control and deployment:
+- `.claude/settings.local.json` - Local development settings
+- `package-lock.json` - Auto-generated, regenerated on install
+
+## 🚨 Troubleshooting
+
+If deployment fails:
+1. Ensure you're authenticated with GitHub: `gh auth status`
+2. Check that your repository is public or you have proper authentication
+3. Verify the base path in `vite.config.ts` matches your repository name
+4. Run `npm run build` locally to verify the build works
+
+## 💡 Notes
+
+- The project uses **Fluid Compute** (Vercel Functions equivalent) for serverless functions
+- GitHub Pages serves static files only, so the build output is perfect for deployment
+- The base path configuration ensures routing works correctly on GitHub Pages

@@ -57,7 +57,7 @@
             "dev": "vite",
             "build": "vite build",
             "predeploy": "npm run build",
-            "deploy": "gh-pages -d build"
+            "deploy": "./deploy.sh"
       },
       "homepage": "https://chenmicky.github.io/claude_code_treasure_game"
 }
