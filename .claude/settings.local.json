@@ -1,0 +1,9 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+    "ANTHROPIC_AUTH_TOKEN": "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",
+    "ANTHROPIC_API_KEY": "",
+    "ANTHROPIC_MODEL": "openrouter/elephant-alpha",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "openrouter/elephant-alpha"
+  }
+}
