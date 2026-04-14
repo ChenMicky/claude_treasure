@@ -5,5 +5,12 @@
     "ANTHROPIC_API_KEY": "",
     "ANTHROPIC_MODEL": "openrouter/elephant-alpha",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "openrouter/elephant-alpha"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(gh pages:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
   }
 }
